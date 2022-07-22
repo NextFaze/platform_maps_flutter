@@ -14,7 +14,11 @@ dependencies:
 
   google_maps_flutter: ^2.0.1
   google_maps_flutter_platform_interface: ^2.0.3
-  apple_maps_flutter: ^1.1.0
+  # Fixes a print statement that is not yet published to pub.dev
+  apple_maps_flutter:
+    git:
+      url: https://github.com/LuisThein/apple_maps_flutter
+      ref: 866ff78adcd83c1b5c8057fc705a29bfeea8cad9
 
 dev_dependencies:
   flutter_test:
