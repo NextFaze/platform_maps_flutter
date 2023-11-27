@@ -18,7 +18,7 @@ dependencies:
   apple_maps_flutter:
     git:
       url: https://github.com/NextFaze/apple_maps_flutter
-      ref: dd5599c205fa2a36bbf2c7ffe744b69758a741bc
+      ref: 26342302d01ab47ac7be9d1733f1a8f337b0ce8a
 
 dev_dependencies:
   flutter_test:
