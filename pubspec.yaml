@@ -17,8 +17,8 @@ dependencies:
   # Fixes a print statement that is not yet published to pub.dev
   apple_maps_flutter:
     git:
-      url: https://github.com/LuisThein/apple_maps_flutter
-      ref: 866ff78adcd83c1b5c8057fc705a29bfeea8cad9
+      url: https://github.com/NextFaze/apple_maps_flutter
+      ref: dd5599c205fa2a36bbf2c7ffe744b69758a741bc
 
 dev_dependencies:
   flutter_test:
