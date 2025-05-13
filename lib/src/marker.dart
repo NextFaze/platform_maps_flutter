@@ -97,7 +97,6 @@ class Marker {
   /// * has no info window text; [infoWindowText] is `InfoWindowText.noText`
   /// * is positioned at 0, 0; [position] is `LatLng(0.0, 0.0)`
   /// * is visible; [visible] is true
-  /// * is placed at the base of the drawing order; [zIndex] is 0.0
   const Marker({
     required this.markerId,
     this.alpha = 1.0,
@@ -110,6 +109,7 @@ class Marker {
     this.onTap,
     this.visible = true,
     this.onDragEnd,
+    this.zIndex,
   }) : assert((0.0 <= alpha && alpha <= 1.0));
 
   /// Uniquely identifies a [Marker].
@@ -154,6 +154,13 @@ class Marker {
 
   final ValueChanged<LatLng>? onDragEnd;
 
+  /// The z-index of the marker, used to determine relative drawing order of
+  /// map overlays.
+  ///
+  /// Overlays are drawn in order of z-index, so that lower values means drawn
+  /// earlier, and thus appearing to be closer to the surface of the Earth.
+  final double? zIndex;
+
   appleMaps.Annotation get appleMapsAnnotation => appleMaps.Annotation(
         annotationId: this.markerId.appleMapsAnnoationId,
         alpha: this.alpha,
@@ -169,6 +176,7 @@ class Marker {
                 _onAppleAnnotationDragEnd(latLng, this.onDragEnd)
             : null,
         position: this.position.appleLatLng,
+        zIndex: this.zIndex ?? -1,
       );
 
   googleMaps.Marker get googleMapsMarker => googleMaps.Marker(
@@ -186,6 +194,7 @@ class Marker {
                 _onGoogleMarkerDragEnd(latLng, this.onDragEnd)
             : null,
         position: this.position.googleLatLng,
+        zIndex: this.zIndex ?? 0
       );
 
   static appleMaps.Annotation appleMapsAnnotationFromMarker(Marker marker) =>
@@ -222,6 +231,7 @@ class Marker {
                 _onGoogleMarkerDragEnd(latLng, marker.onDragEnd)
             : null,
         position: marker.position.googleLatLng,
+        zIndex: marker.zIndex ?? 0
       );
 
   static Set<appleMaps.Annotation> toAppleMapsAnnotationSet(
@@ -251,6 +261,7 @@ class Marker {
     LatLng? positionParam,
     bool? visibleParam,
     VoidCallback? onTapParam,
+    double? zIndexParam,
   }) {
     return Marker(
       markerId: markerId,
@@ -263,6 +274,7 @@ class Marker {
       position: positionParam ?? position,
       visible: visibleParam ?? visible,
       onTap: onTapParam ?? onTap,
+      zIndex: zIndexParam ?? zIndex,
     );
   }
 

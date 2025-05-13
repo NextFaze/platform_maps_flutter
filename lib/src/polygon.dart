@@ -45,6 +45,7 @@ class Polygon {
     this.strokeWidth = 10,
     this.visible = true,
     this.onTap,
+    this.zIndex,
   });
 
   /// Uniquely identifies a [Polygon].
@@ -79,6 +80,13 @@ class Polygon {
   /// Callbacks to receive tap events for polygon placed on this map.
   final VoidCallback? onTap;
 
+  /// The z-index of the polygon, used to determine relative drawing order of
+  /// map overlays.
+  ///
+  /// Overlays are drawn in order of z-index, so that lower values means drawn
+  /// earlier, and thus appearing to be closer to the surface of the Earth.
+  final int? zIndex;
+
   /// Creates a new [Polygon] object whose values are the same as this instance,
   /// unless overwritten by the specified parameters.
   Polygon copyWith({
@@ -89,6 +97,7 @@ class Polygon {
     int? strokeWidthParam,
     bool? visibleParam,
     VoidCallback? onTapParam,
+    int? zIndexParam,
   }) {
     return Polygon(
       polygonId: polygonId,
@@ -99,6 +108,7 @@ class Polygon {
       strokeWidth: strokeWidthParam ?? strokeWidth,
       visible: visibleParam ?? visible,
       onTap: onTapParam ?? onTap,
+      zIndex: zIndexParam ?? zIndex,
     );
   }
 
@@ -119,7 +129,8 @@ class Polygon {
         visible == typedOther.visible &&
         strokeColor == typedOther.strokeColor &&
         strokeWidth == typedOther.strokeWidth &&
-        onTap == typedOther.onTap;
+        onTap == typedOther.onTap &&
+        zIndex == typedOther.zIndex;
   }
 
   @override
@@ -150,6 +161,7 @@ class Polygon {
         strokeColor: this.strokeColor,
         strokeWidth: this.strokeWidth,
         visible: this.visible,
+        zIndex: this.zIndex ?? 0,
       );
 
   appleMaps.Polygon get appleMapsPolygon => appleMaps.Polygon(
@@ -161,5 +173,6 @@ class Polygon {
         strokeColor: this.strokeColor,
         strokeWidth: this.strokeWidth,
         visible: this.visible,
+        zIndex: this.zIndex,
       );
 }
