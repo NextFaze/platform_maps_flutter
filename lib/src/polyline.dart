@@ -123,6 +123,7 @@ class Polyline {
           startCap: _Cap.googlePolylineCap(polyline.polylineCap),
           visible: polyline.visible,
           width: polyline.width,
+          zIndex: polyline.zIndex
         ),
       );
     });
@@ -144,6 +145,7 @@ class Polyline {
           points: LatLng.appleMapsLatLngsFromList(polyline.points),
           visible: polyline.visible,
           width: polyline.width,
+          zIndex: polyline.zIndex
         ),
       );
     });
